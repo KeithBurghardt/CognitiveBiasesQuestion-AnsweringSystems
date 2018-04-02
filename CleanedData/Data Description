@@ -1,0 +1,48 @@
+This is the data we analyze for the paper. There are 4 worlds:
+
+1) Random: No score is shown, answers are ordered randomly (and we know the order)
+2) Social_Influence: Random scores are created (values of 0-100 for 2-answer questions and 0-25 for 8-answer questions), 
+   and scores are sorted from highest-to-lowest. Answers are still ordered randomly.
+3) Social_Influence_Random: Random scores (unsorted) are created for each answer. Answers are still ordered randomly
+4) [Ongoing]: Dynamic_Score: Answers are sorted by popularity (how many times they are chosen the "best"). 
+   Scores are equal to the number of workers that chose that answer as the best before the experiment started.
+
+Columns:
+
+1: Experiment #: This is an arbitrary numbering of the cleaned experiments via different batches created on Mechanical Turk. 
+   Each experiment listed was fully completed by a unique user.
+
+2: Question #: The question (between 1 and 10). Questions are listed in "/rank2/Questions" on the MySQL database. 
+	       Answers are listed in "/rank2/AnswersI", where "I" is "1", "2",...
+
+3: Number of Answers: Number of answers a user sees, e.g., 2 or 8 answers visible.
+
+4: Start Date: Seconds after the user first begins Question 1, e.g., “0”, ”12", or "233".
+
+5: Answer Chosen: Which answer (1-8) is chosen, where answer indices are chronologically ordered based on the original 
+		  StackExchange data, e.g., answer "1" was the oldest answer on Stack Exchange's ELL Question, while "8" is
+		  the 8th oldest (one of the newest).
+
+6: Answer Order: The order the answers appear to each user, e.g., "2,1" means the 2nd oldest answer was listed at the top
+		 of the page, while the oldest answer appears at the bottom of the page.
+
+
+7: Number of Characters in Each Answer: How many characters (e.g., “a” or “ “) appear in each answer, where values are ordered in the same way as “Answer Order” (column 6) and not by answer index (1 through 2 or 8). We ignore breaks and pictures, but count spaces.
+
+8: Total Experiment Time (Seconds): How long the user took to complete the experiment, i.e., answer all 10 questions (in seconds).
+
+9: Answer Ordering: All answers were ordered either at random (denoted as “random”) or from highest to lowest score (denoted as “ordered by score”). 
+
+10: IP Address: This is the IP Address found via the "REMOTE_ADDRESS" function on php
+
+11-25 (odd numbers): Time Mouse Scrolled Over Answer I (Seconds After Start Time): "Answer I" is used to denote "Answer 1", "Answer 2", etc., where “Answer I” is chronologically ordered.
+										    Here we list the timestamps (seconds after the user begins Question 1) 
+										    in which a mouse scrolled over an answer paragraph OR check mark
+
+12-26 (even numbers): Time Mouse Moved Away From Answer I (Seconds After Start Time): "Answer I" is used to denote "Answer 1", "Answer 2", etc., where “Answer I” is chronologically ordered.
+										    Here we list the timestamps (seconds after the user begins Question 1) 
+										    in which a mouse scrolled away outside of an answer paragraph 
+										    and check mark.
+27: Amazon Worker ID: This is the worker ID Amazon Mechanical Turk uses to distinguish workers, e.g., "A3LMI7ZDFO8JHR".
+
+28: Score: We list the score each answer receives which is a random number between 0-100 (inclusive) for 2 answers, and 0-25 (inclusive) for 8 answers. Each score is independent of all others, and values are ordered in the same way as “Answer Order” (column 6) and not by answer index (1 through 2 or 8)
