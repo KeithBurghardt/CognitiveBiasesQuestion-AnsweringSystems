@@ -1,0 +1,98 @@
+In this folder are 3 subfolders:
+
+(1) Task_Dynamic_Scores_2
+
+(2) Task_Dynamic_Scores_8
+
+(3) Task_Non-Dynamic_Scores
+
+The first two allow for answer scores to be dynamically updated. 
+Scores in other words reflect the number of people who considered 
+that answer to be the best before the experiment started. Either 
+2 or 8 answers are visible to users, for each respective folder.
+Before starting an experiment, set up the MySQL server as below 
+and run "configure_mysql_start.php".
+
+Task_Non-Dynamic_Scores randomizes answer position. There are 3 
+options possible for this code:
+
+    (1) Random: 		list answers randomly (no scores visible)
+				This is meant to study how users pick answers 
+				independent of perceived answer popularity.
+
+    (2) Social Influence: 	list answers randomly (scores listed highest 
+				to lowest). This is meant to simulate Stack 
+				Exchange (and other Q&A boards) where answers 
+				are by default ordered from most to least popular.
+
+    (3) Social Influence Random:list answers and scores randomly. This allows us 
+				to allow for us to study how answer the two 
+				relate to each other.
+
+Each of these options can be selected in user_start.php, by changing $type:
+    (1) $type = "random";
+    (2) $type = "popularity_high_low";
+    (3) $type = "popularity_randomized";
+All questions and answers we used can be seen in acknowledgements.php.
+
+NOTE:
+
+- This code requires a connection to a MySQL server. The server, user name, 
+  password, and database can be set in "db_utility.php".
+- The code reads from several tables to set up questions and answers:
+
+	1) "Questions" table - has question titles listed in "Title1"..."Title10" 
+		             - has body of questions listed in "Body1"..."Body10"
+			     - these are all strings
+
+	2) "Answers1" table ..."Answers10" table - lists answers for question 1, 
+						   question 2, ...
+	   					 - these are all strings.
+
+- This data requires access to several table columns in a table labeled 
+  "experiments_new":
+
++----------------+------------+------+-----+---------+----------------+
+| Field          | Type       | Null | Key | Default | Extra          |
++----------------+------------+------+-----+---------+----------------+
+| ipaddress      | char(20)   | YES  |     | NULL    |                |
+| assignment_id  | int(11)    | NO   | PRI | NULL    | auto_increment |
+| experiment_id  | int(11)    | YES  |     | NULL    |                |
+| visibility     | char(40)   | YES  |     | NULL    |                |
+| hit_id         | char(30)   | YES  |     | NULL    |                |
+| worker_id      | char(30)   | YES  |     | NULL    |                |
+| NumAns         | int(11)    | YES  |     | NULL    |                |
+| TimeStarted    | char(20)   | YES  |     | NULL    |                |
+| AnswerChosen   | int(11)    | YES  |     | NULL    |                |
+| AnswerOrder    | int(11)    | YES  |     | NULL    |                |
+| end_time       | char(20)   | YES  |     | NULL    |                |
+| status         | char(20)   | YES  |     | NULL    |                |
+| QNum           | int(11)    | YES  |     | NULL    |                |
+| survey_code    | int(11)    | YES  |     | NULL    |                |
+| Score          | int(11)    | YES  |     | NULL    |                |
+| TimeInArray_0  | bigint(20) | YES  |     | NULL    |                |
+| TimeOutArray_0 | bigint(20) | YES  |     | NULL    |                |
+...
+| TimeInArray7   | bigint(20) | YES  |     | NULL    |                |
+| TimeOutArray7  | bigint(20) | YES  |     | NULL    |                |
++----------------+------------+------+-----+---------+----------------+
+
+	hit_id, worker_id, & experiment_id are defunct. 
+	All columns are self-explanitory, except:
+	- visibility: whether scores are visible/ordered randomly. 
+		      This is the $type value above.
+	- status: submitted (else data is not recorded)
+	- TimeInArray_i: the time (Unix Time) when a mouse began 
+			 scrolling over answer "i".
+	- TimeOutArray_i: the time (Unix Time) when a mouse left
+                          answer "i".
+
+- Furthermore, the code requres the table "survey_codes"
+  with the following columns:
+
++-------------+---------+------+-----+---------+----------------+
+| Field       | Type    | Null | Key | Default | Extra          |
++-------------+---------+------+-----+---------+----------------+
+| survey_code | int(11) | YES  |     | NULL    |                |
+| id          | int(11) | NO   | PRI | NULL    | auto_increment |
++-------------+---------+------+-----+---------+----------------+
