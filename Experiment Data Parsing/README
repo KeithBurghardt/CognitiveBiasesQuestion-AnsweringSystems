@@ -1,0 +1,138 @@
+Comparison Between Experiment and Observational Data
+
+Code: PVoteVsPosition28.py
+      NaturalExperiment.nb
+
+Data: Natural Experiment Data
+
+Description of NaturalExperiment.nb:
+In Stack Exchange, answers with the same vote were either ordered 
+oldest-first (before August, 2009), or randomly (after August, 2009).
+We specifically look at data before answers were accepted (which affects 
+the position of all answers), and determine whether the change made 
+older answers more or less likely to be chosen. If position strongly 
+affects answer choice, then the change will reduce the probability an 
+answer is chosen. We find that this is true, and the position effect 
+increases with answer position. 
+
+A small aside, with few answers, older answers are more likely to be 
+chosen, but with more answers, its newer answers that are preferred. 
+This may reflect newer answers being improvements on older answers when 
+more answers are available.
+
+Description of PVoteVsPosition28.py:
+
+We want to compare the probability an answer is voted on versus its position. 
+We have two datasets: the experiment data (see: CleanedData), and the empirical data.
+The following are the simple ways we calculated the probabilities:
+
+ - Experiment: we simply add up all the votes made to any answer versus the answer’s 
+               position. Normalizing this histogram gives us the probability an answer 
+               is voted on versus position.
+
+ - Empirical Data: We gathered data from https://archive.org/details/stackexchange 
+                   on answers and answer votes. Codes to process this data are seen in 
+                   the other GitHub repository “Stack-Exchange-User-Behavior”. 
+                   For each board, this data includes: 
+
+Vote Data:
+	- VoteId (chronologically ordered votes)
+	- PostId (what answer was voted on)
+	- VoteTypeId (if it was an upvote, downvote, or accepted answer)
+	- ParentId (which question was voted on)
+
+Answer Data:
+	- Board
+	- Id
+	- PostParentId (which question was associated with that answer)
+	- CreationDate
+
+Our algorithm was the following:
+
+	1)  We sort answers by their associated questions, and find the time periods when only 2 or 8 answers were visible (lets call the two time periods T1 and T2). 
+	2) Votes were recorded as 12:00 a.m. on the day they were caste (this was verified by checking votes made for the first answer). We assume votes were made after an answer is created, therefore we recalculated the vote time to be 11:59 p.m. on the day they were caste. This seems more sensible, but we do not believe it changes our findings (other than plausibly making them more accurate).
+	3) We ignore the position of all votes made before August 31, 2009. Before then, when answers have the same score, answers were not listed randomly, which may affect results. See: 
+ 		Oktay, H.; Taylor, B. J.; and Jensen, D. D. 2010. Causal discovery in social media using quasi-
+		experimental designs. In SOMA 2010 , 1–9. ACM.
+
+	4) We added up all votes to each answer made before T1 (upvotes minus downvotes). Then we sorted answers from highest-to-lowest score. We then recorded the answer position for each subsequent vote, and updated answer scores after a vote was caste (and resorted answers as necessary).
+	5) We stop recording vote positions if a vote was made after T2, or if an answer was accepted (which can affect results)
+	6) We do this for all questions in a board and for all non-technical boards. Stack Exchange defines these boards to be ones listed below. Note that the data recorded was only before September 2014, therefore newer boards not listed here are not studied:
+
+academia
+anime
+astronomy
+aviation
+avp
+beer
+bicycles
+biology
+bitcoin
+boardgames
+bricks
+buddhism
+chemistry
+chess
+chinese
+christianity
+cogsci
+comstackapps
+cooking
+cs
+cstheory
+diy
+earthscience
+ell
+english
+expatriates
+fitness
+freelancing
+french
+gaming
+gardening
+genealogy
+german
+graphicdesign
+ham
+hermeneutics
+hinduism
+history
+homebrew
+islam
+italian
+japanese
+judaism
+linguistics
+martialarts
+Math
+matheducators
+mechanics
+moderators
+money
+movies
+music
+netmathoverflow
+outdoors
+parenting
+patents
+pets
+philosophy
+photo
+physics
+pm
+poker
+politics
+productivity
+quant
+rpg
+russian
+scicomp
+scifi
+skeptics
+spanish
+sports
+stats
+sustainability
+travel
+workplace
+writers
