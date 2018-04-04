@@ -1,9 +1,9 @@
 Comparison Between Experiment and Observational Data
 
 Code: PVoteVsPosition28.py
-      NaturalExperiment.nb
+      NaturalExperiment.py
 
-Data: Natural Experiment Data
+Data: Natural Experiment Data.zip
 
 Description of NaturalExperiment.nb:
 In Stack Exchange, answers with the same vote were either ordered 
