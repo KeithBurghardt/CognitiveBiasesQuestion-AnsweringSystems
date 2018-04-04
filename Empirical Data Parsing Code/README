@@ -3,7 +3,9 @@ Comparison Between Experiment and Observational Data
 Code: PVoteVsPosition28.py
       NaturalExperiment.py
 
-Data: Natural Experiment Data.zip
+
+Data: Raw:     https://archive.org/details/stackexchange
+      Cleaned: https://www.openicpsr.org/openicpsr/project/102420/version/V1/view/
 
 Description of NaturalExperiment.nb:
 In Stack Exchange, answers with the same vote were either ordered 
