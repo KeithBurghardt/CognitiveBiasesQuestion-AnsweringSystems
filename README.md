@@ -5,10 +5,10 @@ K. Burghardt, T. Hogg, & K. Lerman. "Quantifying the Impact of Cognitive Biases 
 
 This repository contains 4 folders:
 
-CleanedData:                  Cleaned experiment data
-Empirical Data Parsing Code:  Code used to compare Stack Exchange data to experiment data
-Experiment Data Parsing Code: Code to convert raw experiment data to cleaned data
-Experiment PHP Code:          Code to create experiment
+-CleanedData:                  Cleaned experiment data
+-Empirical Data Parsing Code:  Code used to compare Stack Exchange data to experiment data
+-Experiment Data Parsing Code: Code to convert raw experiment data to cleaned data
+-Experiment PHP Code:          Code to create experiment
 
 To run experiment:
 - Set up MySQL server and Apache server, following the guidelines of the "Experiment PHP Code" README
