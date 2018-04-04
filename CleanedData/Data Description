@@ -1,12 +1,57 @@
-This is the data we analyze for the paper. There are 4 worlds:
+
+=========================================================
+Cleaned_Data.csv Codebook
+=========================================================
+
+When using this code, please cite: Keith Burghardt, Tad Hogg, Kristina Lerman. 
+“Quantifying the Impact of Cognitive Biases in Question-Answering Systems” In ICWSM’18 (2018).
+
+For questions contact:
+
+- Keith Burghardt
+  University of California, Davis
+  Davis, CA 95616
+  Email: kaburghardt@ucdavis.edu*
+
+- Tad Hogg 
+  Institute for Molecular Manufacturing
+  Palo Alto, CA 94301
+  Email: tadhogg@yahoo.com
+
+- Kristina Lerman 
+  Information Sciences Institute
+  Marina del Rey, CA 90292
+  Phone: (310) 448-8714 
+  Email: lerman@isi.edu
+
+*NOTE: this email may change soon.
+
+=========================================================
+How data was gathered:
+
+Amazon Mechanical Turk workers with over 1000 Human Intelligence Tasks (HITs), 
+and with over 95% approval rating, were instructed to complete an experiment 
+by clicking on a URL link that brought them to a webpage hosted by our server 
+running HTML/PHP code seen in this repository (see: Task_Non-Dynamic_Scores/). 
+User data, such as what answer was clicked and whether users moused over an 
+answer, was collected and stored locally.
+
+We use Mathematica program "ConvertData.nb" to convert raw data from the 
+experiment to cleaned data seen in the repository. Some spurious data (e.g., 
+data from users who did not complete the experiment) was removed from the 
+MySQL database file prior to being cleaned.
+
+Finally, there are 4 worlds:
 
 1) Random: No score is shown, answers are ordered randomly (and we know the order)
 2) Social_Influence: Random scores are created (values of 0-100 for 2-answer questions and 0-25 for 8-answer questions), 
    and scores are sorted from highest-to-lowest. Answers are still ordered randomly.
 3) Social_Influence_Random: Random scores (unsorted) are created for each answer. Answers are still ordered randomly
-4) [Ongoing]: Dynamic_Score: Answers are sorted by popularity (how many times they are chosen the "best"). 
+4) Dynamic_Score [Ongoing research]: Answers are sorted by popularity (how many times they are chosen the "best"). 
    Scores are equal to the number of workers that chose that answer as the best before the experiment started.
 
+
+=========================================================
 Columns:
 
 1: Experiment #: This is an arbitrary numbering of the cleaned experiments via different batches created on Mechanical Turk. 
@@ -27,13 +72,15 @@ Columns:
 		 of the page, while the oldest answer appears at the bottom of the page.
 
 
-7: Number of Characters in Each Answer: How many characters (e.g., “a” or “ “) appear in each answer, where values are ordered in the same way as “Answer Order” (column 6) and not by answer index (1 through 2 or 8). We ignore breaks and pictures, but count spaces.
+7: Number of Characters in Each Answer: How t many characters (e.g., “a” or “ “) appear in each answer, where values are ordered in the same way as “Answer Order” (column 6) and not by answer index (1 through 2 or 8). We ignore breaks and pictures, but count spaces.
 
 8: Total Experiment Time (Seconds): How long the user took to complete the experiment, i.e., answer all 10 questions (in seconds).
 
 9: Answer Ordering: All answers were ordered either at random (denoted as “random”) or from highest to lowest score (denoted as “ordered by score”). 
 
-10: IP Address: This is the IP Address found via the "REMOTE_ADDRESS" function on php
+10: If raw data is parsed: This is the IP Address found via the "REMOTE_ADDRESS" function on php
+
+10: In publicly available data, this data is removed to keep users anonymous
 
 11-25 (odd numbers): Time Mouse Scrolled Over Answer I (Seconds After Start Time): "Answer I" is used to denote "Answer 1", "Answer 2", etc., where “Answer I” is chronologically ordered.
 										    Here we list the timestamps (seconds after the user begins Question 1) 
