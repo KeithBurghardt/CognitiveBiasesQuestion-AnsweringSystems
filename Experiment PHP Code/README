@@ -1,3 +1,5 @@
+# PHP Code
+
 In this folder are 3 subfolders:
 
 (1) Task_Dynamic_Scores_2
@@ -12,6 +14,9 @@ that answer to be the best before the experiment started. Either
 2 or 8 answers are visible to users, for each respective folder.
 Before starting an experiment, set up the MySQL server as below 
 and run "configure_mysql_start.php".
+
+The experiment runs in the following order: visitor.php -> user_start.php -> story_info_print.php -> user_complete.php
+N.B.: To start experiment, make sure user first visits visitor.php.
 
 Task_Non-Dynamic_Scores randomizes answer position. There are 3 
 options possible for this code:
