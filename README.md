@@ -13,6 +13,6 @@ This repository contains 4 folders:
 To run experiment:
 - Set up MySQL server and Apache server, following the guidelines of the "Experiment PHP Code" README
 - Set up a Human Intelligence Task (HIT) via Amazon Mechanical Turk
-- Have workers access server via a URL
+- Have workers access server via a URL: [IP Address]/[Folder]/visitor.php
 - Collect raw data (SQL server data) and batch files (from Amazon Mechanical Turk)
 - Process raw data using "Empirical Data Parsing Code" folder
